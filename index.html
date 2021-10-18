@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HSC　お便利ツール</title>
+<link rel="stylesheet" type="text/css" href="./css/layout.css" />
+<script type="text/javascript" src="./js/conv_Kmoji.js"></script>
+<script type="text/javascript" src="./js/konv_zenhan.js"></script>
+<script type="text/javascript" src="./js/karagyou.js"></script>
+<script type="text/javascript" src="./js/kmoji_check.js"></script>
+<script type="text/javascript" src="./js/konv_en_to_han.js"></script>
+<script type="text/javascript" src="./js/konv_han.js"></script>
+<script type="text/javascript" src="./js/kara_sakujyo.js"></script>
+<script type="text/javascript" src="./js/tagDel.js"></script>
+<script type="text/javascript" src="./js/tab.js"></script>
+<script type="text/javascript" src="./js/space.js"></script>
+</head>
+<body>
+<div class="container">
+	<div class="block">
+		<h1>HSC　お便利ツール</h1>
+		<form name="henkan">
+			<div class="block__element">
+				<div id="kome"></div>
+				<textarea name="mytext" rows="46" cols="50" id="mytext" id="mae" style=""></textarea>
+			</div>
+			<div class="block__element">
+				<div class="midashi">機種依存文字関連</div>
+				<br clear="all"/>
+				<input type="button" onClick="replace_check()" value="機種依存文字があるかチェック" class="botan" />
+				<input type="button" onClick="conv_Kmoji()" value="機種依存文字を数値文字参照（文字コード）に変換" class="botan" />
+				<br clear="all"/>
+				<div class="midashi">英数字変換</div>
+				<br clear="all"/>
+				<input type="button" onClick="konv_zenhan()" value="洋数字１桁を全角、２桁以上を半角に変換" class="botan" />
+				<input type="button" onClick="konv_en_to_han()" value="全角の英数字記号をnikkeiと同じロジックで半角に変換" class="botan" >
+				<!--<input type="button" onClick="konv_han()" value="【住宅用】洋数字を全て半角に変換" class="botan" >-->
+				<br clear="all">
+				<div class="midashi">テキスト関連</div><br clear="all"/>
+				<input type="button" onClick="tagDel()" value="タグ削除（文中からHTMLや電子版などのタグを削除）" class="botan" />
+				<input type="button" onClick="space()" value="行頭に全角スペース挿入（既に入っているものはそのまま）" class="botan" />
+				<input type="button" onClick="tab()" value="全角、半角のスペースをタブに変換（テーブルツール用）" class="botan" />
+				<div class="midashi">空行について</div><br clear="all"/>
+				<input type="button" onClick="kara_sakujyo()" value="空行を削除する" class="botan" >
+				<input type="button" onClick="karagyou()" value="全ての改行を２改行に統一（カレッジなどで空行が必要な時に）" class="botan" >
+				<!--<p style="margin:20px 0 0 20px;font-size:90%;"><a href="sumai_table.html" target="_blank">住宅用テーブルツール</a></p>-->
+			</div>
+		</form>
+	</div>
+</div>
+	<br clear="all">
+	<hr width="100%"/>
+	<div id="kom"></div><br>
+	<div id="preview"></div><br>
+
+</body>
+</html>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+<meta charset="UTF-8">
+<title>TABLEツール</title>
+<script type="text/javascript" src="./js/common.js"></script>
+<script type="text/javascript" src="./js/csv2table.js"></script>
+<script type="text/javascript" src="./js/input_guid.js"></script>
+<script type="text/javascript" src="./js/encoding.js"></script>
+<script type="text/javascript" src="./js/ul.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+<link rel="stylesheet" type="text/css" href="./css/tbl_style.css" />
+<link rel="stylesheet" type="text/css" href="https://r.nikkei.com/.resources/static/data-table/www.css" />
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+$(document).ready( function() {
+	$('body').keyup(function() {
+		$('#preview').html($('#to').val());
+	});
+    $("input:button").click(function(){
+		$('#preview').html($('#to').val());
+    });
+$("#from").val("");
+$("#title").val("");
+$("#caption").val("");
+$("#to").val("");
+});
+
+</script>
+</head>
+<body onload="setProfile();">
+	<div class="header">
+<h2>テーブル作成ツール</h2>
+
+<h3>個別にclassを設定する場合は<a href="conf.html" target="_blank">こちら</a>、classの実際のスタイル見本<a href="https://r.nikkei.com/.resources/static/data-table/example.html" target="_blank">こちら</a></h3>
+
+	</div>
+	<div class="container">
+		<div class="input">
+			<input type="text" id="title" maxlength="999999"  placeholder="見出し" autocomplete="off"><br />
+			<textarea id="from" placeholder="エクセルの表（TSV）を貼り付けてください" style="margin:4px 0;"></textarea>
+			<input type="text" id="caption" maxlength="999999"  placeholder="注釈" autocomplete="off">
+			<div style="text-align:center;margin:5px 0;">↓　↓　↓　↓　↓　↓　↓　↓　↓　↓　↓　↓</div>
+			<textarea id="to" name="to" placeholder="ココにHTMLが吐き出されます"></textarea>
+		</div>
+	</div>
+
+<!--右ナビ-->
+	<div class="right_navi">
+		<input type="hidden" id="nl2br" checked=true />
+		<input type="hidden" id="stab" checked=true />
+		<div class="inputtop" style="text-align:left; padding-left:20px;">
+			基本情報
+		</div>
+		<div class="input2">
+			<input type="text" id="twidth" maxlength="4" size="20"  placeholder="widthを入力（％は不可）"> px 
+		</div>
+		<div class="input2">
+			<input type="checkbox" id="talign" /><label for="notblank" class="checkbox">テーブルの中央配置
+		</div>
+		<div class="input2">文字サイズ　　
+			<input type="radio" name="fsize" value=" rn-table--compact">小　
+			<input type="radio" name="fsize" value="" checked>中　
+			<input type="radio" name="fsize" value=" rn-table--large">大
+		</div>
+		<div class="inputtop2">
+			テーブルのデザイン
+		</div>
+		<div class="input2">
+			<input type="checkbox" id="stripe" /><label for="stripe" class="checkbox">ストライプ模様</label>
+		</div>
+		<div class="input2">
+			<input type="checkbox" id="tborder" /><label for="tborder" class="checkbox">セルごとに罫線で区切らない</label>
+		</div>
+		<div class="inputtop2">
+			<input type="checkbox" id="notblank" onclick="resetFitBlank()" checked=true /><label for="notblank" class="checkbox">空白セルを連結する</label>
+		</div>
+		<div class="input2">
+			<input type="checkbox" id="fitblank" onclick="resetNotBlank()" checked /><label for="fitblank">colspan優先</label>&nbsp;
+			<input type="checkbox" id="fitblanktop" onclick="resetNotBlankTop()" /><label for="fitblanktop">rowspan優先</label>
+		</div>
+		<div class="inputtop2">
+			<input type="checkbox" value="1" id="theadrows" onkeyup="setProfile();" onchange="setProfile();" checked=true /><label for="theadrows">&lt;THEAD&gt;あり</label>
+		</div>
+			<input type="hidden" id="setthead" onclick="setProfile();" checked=true>
+		<div class="input2">
+			背景色
+			<select id="theadstyle" onkeyup="setProfile();" onchange="setProfile();" >
+				<option value="rn-table__cell-head--gray">グレー</option>
+				<option value="rn-table__cell-head--dark-gray">ダークグレー</option>
+				<option value="rn-table__cell-head--blue">水色</option>
+				<option value="rn-table__cell-head--dark-blue">青</option>
+				<option value="rn-table__cell-data--white">白</option>
+			</select>　　
+			<input type="checkbox" value=" rn-table__cell--bold" id="theadstyle2" onclick="setProfile();"><label for="theadstyle2">太字</label>
+		</div>
+		<div class="input2">
+			文字の位置　
+			<select id="theadstyle3" onkeyup="setProfile();" onchange="setProfile();" >
+				<option value="">左右を選択</option>
+				<option value=" rn-table__cell--align-left">左</option>
+				<option value=" rn-table__cell--align-center">中</option>
+				<option value=" rn-table__cell--align-right">右</option>
+			</select>　
+			<select id="theadstyle4" onkeyup="setProfile();" onchange="setProfile();" >
+				<option value="">上下を選択</option>
+				<option value=" rn-table__cell--align-top">上</option>
+				<option value="">中</option>
+				<option value=" rn-table__cell--align-bottom">下</option>
+			</select>
+
+		</div>
+		<div class="inputtop2">
+			<input type="checkbox" value="1" id="thcols" onkeyup="setProfile();" onchange="setProfile();" /><label for="thcols">&lt;TBODY&gt;の１番左の列に&lt;TH&gt;</label>
+		</div>
+			<input type="hidden" id="setlevel" onclick="setProfile();" checked=true >
+		<div class="input2">
+			背景色
+			<select id="setlevelname" onkeyup="setProfile();" onchange="setProfile();" >
+				<option value="rn-table__cell-head--gray">グレー</option>
+				<option value="rn-table__cell-head--dark-gray">ダークグレー</option>
+				<option value="rn-table__cell-head--blue">水色</option>
+				<option value="rn-table__cell-head--dark-blue">青色</option>
+				<option value="rn-table__cell-data--white">白</option>
+			</select>　　
+			<input type="checkbox" value=" rn-table__cell--bold" id="setlevelname2" onclick="setProfile();"><label for="setlevelname2">太字</label>
+		</div>
+		<div class="input2">
+			文字の位置　
+			<select id="setlevelname3" onkeyup="setProfile();" onchange="setProfile();" >
+				<option value="">左右を選択</option>
+				<option value=" rn-table__cell--align-left">左</option>
+				<option value=" rn-table__cell--align-center">中</option>
+				<option value=" rn-table__cell--align-right">右</option>
+			</select>　
+			<select id="setlevelname4" onkeyup="setProfile();" onchange="setProfile();" >
+				<option value="">上下を選択</option>
+				<option value=" rn-table__cell--align-top">上</option>
+				<option value="">中</option>
+				<option value=" rn-table__cell--align-bottom">下</option>
+			</select>
+
+		</div>
+		<input type="hidden" id="notlevelfirst" onclick="setProfile();">
+		<input type="hidden" id="setrowclass" onclick="setProfile();">
+		<input type="hidden" value="nrow" id="setrowclassname" maxlength="16" onkeyup="setProfile();" onchange="setProfile();" />
+		<input type="hidden" value="2" id="setrowclassinterval" class="num" maxlength="2" onkeyup="setProfile();" onchange="setProfile();" />
+		<input type="hidden" id="setrowclassnum" onclick="setProfile();">
+
+		<span class="nodump">
+			<input type="hidden" id="nodump" checked/>
+		</span>
+		<div id="swatch" class="">
+			<div id="colorpickercontainer"></div>
+		</div>
+	<div class="change">
+		<input type="button" value="table作成" onclick="exchange();" style="font-size:1.1em;"/><br />
+	</div>
+</div>
+<br clear="all">
+<hr>
+<div style="width:100%;">
+	<div style="margin:20px;width:648px;">
+		<div id="preview" style="zoom:1.1;"></div><br clear="all">
+	</div>
+</div>
+</body>
+</html>

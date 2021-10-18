@@ -1,0 +1,140 @@
+body {
+  width : 100% ;
+
+}
+th{font-weight:400;text-align:left;}
+
+div.header h1 {
+  margin-left:20px;
+	font-size: 30px;
+}
+div.header h2 {
+  margin:5px 0 0 20px;
+	font-size: 26px;
+}
+h3 {
+	font-weight:400;
+	font-size:14px;
+  margin:0 0 10px 22px;
+}
+h4 {
+	margin: 0px 0px 2px;
+	font-size: 12px;
+}
+input{margin-right:3px;}
+
+div.container {
+  margin: 0 0 0 10px;
+  width : 660px ;
+  float:left;
+}
+div.inputtop{
+	background-color: #eee;
+	padding: 6px 5px 6px 10px;
+  font-weight:bold;
+  text-align:center;
+
+}
+div.inputtop2{
+	border-top: solid 1px #ccc;
+	background-color: #eee;
+	padding: 6px 5px 6px 18px;
+  font-weight:bold;
+  text-align:left;
+
+}
+div.input{
+	padding: 2px 10px;
+
+}
+div.input2{
+	border-top: solid 1px #ccc;
+	padding: 6px 5px 6px 30px;
+
+}
+textarea {
+	width: 640px;
+	height: 250px;
+	display: block;
+}
+.right_navi {
+	width: 350px;
+	float : left ;
+	border: solid 1px #ccc;
+	margin:0 0 0 20px;
+
+}
+.num {
+	width: 30px;
+	text-align: right;
+}
+
+.change {
+	border-top: solid 1px #ccc;
+	clear: both;
+	text-align: center;
+	background-color: #eee;
+	padding:3px 10px;
+}
+.commonlines {
+	margin-bottom: 5px;
+	border-bottom: solid 1px #fff;
+	width: 100%;
+	padding-bottom: 2px;
+}
+.copy {
+	float: right;
+}
+.information {
+	margin-bottom: 20px;
+}
+.btnClose {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ccc;
+	color: #f00;
+	background-color: #f99;
+	padding: 2px 3px;
+	text-decoration: none;
+	font-weight: bold;
+	display: block;
+	float: right;
+	width: 12px;
+	height: 12px;
+}
+.btnCheck {
+	float: right;
+}
+
+
+div.rightblock {
+	position: relative;
+}
+span.nodump {
+	width: 140px;
+	float: right;
+}
+#swatch {
+	width: 360px;
+	background-color: #fff;
+	position: absolute;
+	top: 0px;
+	left: -10000px;
+}
+#swatch div.tools {
+	padding: 10px;
+}
+#colorpickercontainer {
+	height: 190px;
+	width: 360px;
+}
+* html #yui-picker-bg {
+
+}
+table {
+	border-collapse: collapse;
+}
+
+#preview{
+font-size:110%;
+}
